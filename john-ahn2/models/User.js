@@ -1,6 +1,7 @@
 // 스마카 작성
 const mongoose = require('mongoose');
-
+const bcrypt = require('bcrypt')
+const salRounds = 10
 const userSchema = mongoose.Schema({
     name:{
         type : String,
@@ -35,6 +36,24 @@ const userSchema = mongoose.Schema({
         type: Number
     }
     //토큰 유효기간
+})
+
+userSchema.pre('save', function(next){
+    var user = this // 위에 스키마를 가리킨다. 
+
+    if(user.isModified('password'))
+    //비번이 변경될 때만 비번화
+    
+    //비번 암호하 시킨다.
+    bcrypt.genSalt(salRounds, function(err, salt){
+
+        if(err) return next(err)
+        bcrypt.hash(user.password, salt, function(err, hash){
+            if(err) return next(err)
+            user.password = hash
+            next()
+        })
+    })
 })
 
 const User = mongoose.model('Uesr', userSchema) // 먼저 모델의 이름 || 나중엔 모델 스키마 작성
