@@ -4,13 +4,14 @@ const port = 5000;
 const bodyParser = require("body-parser")
 const {User} = require("./models/User");
 
+const config = require("./config/key")
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json());
 
 const mongoose = require("mongoose");
 mongoose
   .connect(
-    "mongodb+srv://test_username:0000@cluster0-amulf.mongodb.net/<dbname>?retryWrites=true&w=majority",
+    config.mongoURI,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
