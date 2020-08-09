@@ -2,6 +2,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt')
 const salRounds = 10
+
 const userSchema = mongoose.Schema({
     name:{
         type : String,
@@ -39,19 +40,29 @@ const userSchema = mongoose.Schema({
 })
 
 userSchema.pre('save', function(next){
+    //몽구스가에서 가져온 메소드
+    // 저장하기 전에 무엇을 한다음에 끝나면 다시 회원가입 쪽으로 넘어가서 작업을 지속 
+
     var user = this // 위에 스키마를 가리킨다. 
 
     if(user.isModified('password'))
     //비번이 변경될 때만 비번화
     
-    //비번 암호하 시킨다.
+    //비번 암호화 시킨다.
     bcrypt.genSalt(salRounds, function(err, salt){
+        //sal을 만들때 salRound가 필요하다. // 뒤에 function을 콜백 함수이다. 
 
         if(err) return next(err)
+        // 에러가 발생하면 next을 이용해 회원가입 파트의 err로 정보를 넘겨준다. 
+
         bcrypt.hash(user.password, salt, function(err, hash){
+            //hash의 첫번쨰는 내가 넘길려는 순수한 비번이다. 즉 schema의 비번 이것을 하기 위해서는 46번의 var user = this가 필요하다. 
+            //hash가 암호화된 비번이다.
             if(err) return next(err)
+            
             user.password = hash
             next()
+            console.log('hash 성공');
         })
     })
 })
