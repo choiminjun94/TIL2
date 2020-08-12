@@ -1,12 +1,10 @@
-import React from "react";
-// import SampleContainer from './container/SampleContainer';
-import CounterContainer from "./container/CounterContainer";
+import React from 'react';
+import SampleContainer from './container/SampleContainer';
 
 const App = () => {
   return (
     <div>
-      {/* <SampleContainer /> */}
-      <CounterContainer />
+      <SampleContainer />
     </div>
   );
 };
