@@ -17,3 +17,12 @@ console.time("answer_time");
 alert("확인 버튼을 누르십시오")
 console.timeEnd("answer_time");
 
+setTimwindeout(function(){
+    console.log(new Date());
+},2000)
+// 2초 후에 시간 데이터가 출력
+
+setInterval(function(){
+    console.log(new Date());
+},1000)
+//1초 마다 반복해서 실행

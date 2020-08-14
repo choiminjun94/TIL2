@@ -1,3 +1,4 @@
+0814
 2장
 ====================
 3장
@@ -82,3 +83,33 @@ Act6.html 2번 예제
 1. Dom에서 이벤트 처리기를 등록하는 가장 큰 목적은 HTML과 JS를 분리 하기 위해서 임 - 가독성과 유지보수를 높여줌
 구현 하기 위해서 script요소를 head요소의 자식 요소로 배치 
 DOM을 사용하면 body요소의 바깥에서 body요소 안에 있는 HTMl요소를 조작
+
+2. let button = dicument.getElemnetId("button")메서드로 요소 객체를 가져온다. 
+전달 받은 인수를 id속성의 값으로 가지고 있는 HTML요소의 요소객체를 반환 && 요소를 찾지 못하면 null을 반환
+
+3. 이벤트 처리기 프로퍼티에 이벤트 처리기로 동작할 함수를 등록
+
+4. 이벤트 처리기 제거
+button.onclick = displayTime; 대신 밑의 코드를 입력
+button.onclick = null
+console.log(button.onkeydown);
+
+타이머 
+지정된 시간이 흐른 후에 함수 실행하기 : setTimeout
+ex) 
+setTimeout(function(){
+    console.log(new Date());
+},2000)
+
+지정된 시간마다 반복해서 실행하기 : setInterval
+ex)
+setInterval(function(){
+    console.log(new Date());
+},1000)
+
+HTML 요소의 innerHTML 프로퍼티로 읽고 쓰기
+Act6.html 3번 예제
+
+폼 컨트롤의 입력 값 읽기
+Act6.html 4번 예제
+

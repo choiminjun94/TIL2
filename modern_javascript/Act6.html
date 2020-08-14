@@ -20,6 +20,7 @@
 
 </html> -->
 
+<!-- 2번
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,6 +40,9 @@
             let button = document.getElementById("button");
             // 3. input 요소를 클릭 했을 때 동작하는 이벤트 처리기를 등록 
             button.onclick = displayTime;
+            // button.onclick = null
+            // console.log(button.onkeydown);
+
         }
     </script>
 </head>
@@ -47,4 +51,74 @@
     <input type="button" value="click" id="button">
 </body>
 
-</html>
+</html> -->
+
+<!-- 3번
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스탑워치</title>
+    <script>
+        window.onload = function () {
+            let startButton = document.getElementById("start") // start 버튼 요소
+            let stopButton = document.getElementById("stop") // stop 버튼 요소
+            let displayButton = document.getElementById("display") //결과를 표시하는 요소
+            let startTime, timer;
+            startButton.onclick =  start // start 버튼 활성화
+            function start(){
+                startButton.onclick = null; // start 버튼 비활성화 
+                stopButton.onclick = stop; // stop 버튼 활성화
+                startTime = new Date();
+                // 0.01초마다 경과한 시간을 표시
+                timer = setInterval(function(){
+                    let now = new Date();
+                    // display에 경과한 시간 쓰기
+                    display.innerHTML = ((now - startTime)/1000).toFixed(2);
+                },10)
+            }
+            function stop(){
+                clearInterval(timer) // 타이머 해제
+                startButton.onclick = start // start 버튼 활성화
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <p id = "display">0.00</p>
+    <input id="start" type="button" value="시작">
+    <input id="stop" type="button" value="멈춤">
+</body>
+
+</html> -->
+
+<!-- 4번
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>체질량지수 계산하기</title>
+    <script>
+        window.onload = function(){
+            document.getElementById("button").onclick=function(){
+                //input 요소에 입력된 몸무게 데이터와 키 데이터를 가져온다.
+                let h = parseFloat(document.getElementById("height").value);
+                let w = parseFloat(document.getElementById("weight").value);
+                // 체질량지수를 bmi라는 id를 가진 요소(output요소)에 기록한다.
+                let bmi = document.getElementById("bmi");
+                bmi.innerHTML = (w/h/h).toFixed(1);
+            }
+        }
+    </script>
+</head>
+<body>
+    <p>키 : <input type="number" id="height">m </p>
+    <p>몸무게 : <input type="number" id="weight">kg </p>
+    <p>당신의 체질량지수는 <output id="bmi">?</output>입니다.</p>
+    <input type="button" id="button" value="계산">
+</body>
+</html> -->
