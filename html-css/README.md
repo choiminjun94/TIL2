@@ -32,3 +32,10 @@ html 기초 공부
 <img />
 
 <video></video>
+
+0820
+-공부한 태그
+<html></html>
+<head></head>
+<title></title>
+<a href="" target=""></a>
