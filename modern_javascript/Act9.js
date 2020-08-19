@@ -103,3 +103,33 @@ console.log(person2.propertyIsEnumerable("age"));
 // false : 상속받은 프로퍼티
 console.log(Object.prototype.propertyIsEnumerable("toString"));
 //false : 열거할 수 없는 프로퍼티
+
+//for/in문
+//1
+let person1 = {name : "Tom", age : 17};
+let person2 = Object.create(person1)
+
+person2.name = "Huck";
+for(let p in person2) console.log(p);
+
+//2.
+let a = [0, 2, 4, 6, 8]
+a.name="evens";
+for(let i in a) console.log(i);
+
+// Object.keys 메서드
+let group = {groupName: "Tennis circle"}
+let person = Object.create(group);
+person.name = "Tom";
+person.age = 17
+person.sayHello = function(){console.log("Hello!" +this.name);}
+Object.defineProperty(person, "sayHello", {enumerable: false});
+console.log(Object.keys(person));
+
+//JSON
+
+JSON.stringify({}); // '{}'
+JSON.stringify(3.14) // '3.14'
+JSON.stringify("abc") // '"abc"'
+JSON.stringify(true)
+JSON.stringify([2,4,null])
