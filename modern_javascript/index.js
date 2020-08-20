@@ -1,6 +1,10 @@
-let a = [1,2,3,4,5]
+let zip = new Set(["111-2222", "222-3333"])
 
-a.reduce(function(prev, value){return prev + value}, 0) // 15
-console.log(a);
-a.reduce(function(prev, value){return prev + value}) // 15
-console.log(a);
+function* makeZip(){
+    yield "111-2222";
+    yield "222-3333"
+}
+
+let zips = makeZip();
+zip = new Set(zips)
+console.log(zip.size);

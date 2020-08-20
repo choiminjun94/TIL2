@@ -110,3 +110,39 @@ console.log(a);
 a.reduce(function(prev, value){return prev + value}) // 15
 console.log(a);
 
+// map
+let map = new Map();
+console.log(map);
+
+//데이터 추가
+let zip = new Map();
+zip.set("Tom", "111-222")
+zip.set("kkk", "222-333")
+console.log(zip);
+
+//값 일기
+let zip = new Map();
+zip.set("Tom", "111-222")
+zip.set("kkk", "222-333")
+console.log(zip);
+console.log(zip.get("Tom"));
+
+// Set객체의 생성
+let set = new Set();
+console.log(set);
+// -> set {}
+
+let zip = new Set(["111-2222", "222-3333"])
+
+function* makeZip(){
+    yield "111-2222";
+    yield "222-3333"
+}
+
+let zips = makeZip();
+zip = new Set(zips)
+console.log(zip.size);
+//  2
+
+
+
