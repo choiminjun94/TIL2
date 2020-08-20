@@ -1,7 +1,8 @@
 html 기초 공부
 -공부한 태그
 0819
-<body></body>
+
+<!-- <body></body>
 <div></div>
 <h1></h1>
 <h2></h2>
@@ -10,7 +11,6 @@ html 기초 공부
 <p></p>
 
 <br/>
-
 <strong></strong>
 
 <ul>
@@ -39,4 +39,4 @@ html 기초 공부
 <head></head>
 <title></title>
 <a href="" target=""></a>
- <li><a href="#media">Media</a></li> -> 해당 페이지 목록으로 이동
+ <li><a href="#media">Media</a></li> -> 해당 페이지 목록으로 이동 -->
