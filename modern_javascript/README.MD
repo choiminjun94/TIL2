@@ -398,6 +398,7 @@ JS객체를 JSON 문자열로 변환하기 : JSON.stringify
 두번째 인수로 함수를 지정하면 문자열로 만다는 프로퍼티의 키와 값을 함수의 인수로 받아서 프로퍼티 값을 표현하는 문자열을 반환.
 
 ====================
+
 10장 - 배열의 다양한 기능
 배열의 메서드
 Array타입 객체이며 Array.prototype의 프로퍼티를 상속 받는다.
@@ -554,3 +555,98 @@ set객체는 set 생성자 함수로 생성. 인수를 넘기지 않으면 데�
 
 초기 데이터를 인수로 지정해서 생성할 수도 있다. 이때의 초기 데이터는 값을 가지는 반복 가능한 객체이다.
 
+====================
+14장 
+문서제어
+
+DOM 트리
+문서를 제어하는 API인 DOM의 개요를 설명
+웹 페이지의 내용은 Document 객체가 관리. 웹 브라우저가 웹 페이지를 읽어 들이면 렌더링 엔진은 웹 페이지의 HTML 문서 구문을 해석하고 Document 객체에서 문서 내용을 관리하는 DOM트리
+라고 하는 객체의 트리 구조를 만든다. 
+
+DOM트리를 구성하는 객체 하나를 노드(Node)라고 한다. 기본적인 노드
+
+문서 노드: 전체 문서를 가리키는 Document 객체. document로 참조
+HTML 요소 노드: HTML 요소를 가리키는 객체 (즉 요소 객체라고 한다.)
+텍스트 노드:  텍스트를 가리키는 객체 (즉 텍스트 객체라고 한다.)
+
+노드 객체의 프로퍼티
+- parentNode
+- childNode
+- firstNode
+- lastNode
+- nextSibling
+- previousSibling
+- nodeType
+- nodeValue
+- nodeName
+
+HTML 요소의 트리
+- childNodes
+- parentElement
+- firstElementChild
+- lastElementChild
+- nextElementSibling
+- previousElementSibling
+- childElementCount
+
+주요 노드 객체
+  노드의 종류    생성자     
+
+- 문서 노드   | HTMLDoucument 
+- 요소 노드   | HTMLElemnt
+- 텍스트 노드  | Text
+- 주석 노드   | Comment
+- 속성 노드   | Attr
+
+노드 객체 가져오기
+
+id 속성으로 노드 가져오기
+
+HTML 문서의 요소에는 id속성을 지정할 수 있습니다. id 속성 값은 문서에서 유일한 값이어야 한다. 따라서 id 속성 값으로 요소 하나를 가리킨다. 
+id 값으로 요소 객체를 가져올 때는 getElementById 메서드를 사용한다. 
+
+|| document.getElementById(id값) ||
+
+요소의 이름으르 노드 가져오기
+|| document.getElementsByTagName(요소의 태그 이름)
+
+Class 속성 값으로 노드 가져오기
+|| document.getElementsByClassName(class의_이름) ||
+
+name 속성 값으로 노드 가져오기
+|| document.getElementsByName(name 속성 값) ||
+
+CSS 선택자로 노드 가져오기
+h1
+*
+#title
+h1[title]
+h1[class="maintitle"]
+input:checked
+h1:hover
+#title span
+#title > sapn
+body>h1:first-child
+p, #title
+
+|| document.quertSelectorAll("선택자") ||
+
+|| document.quertSelector("선택자") ||
+
+속성 값의 읽기와 쓰기
+
+요소 객체의 프로퍼티로 요소의 속성을 읽고 쓰기
+
+|| 요소 객체.속성 이름 ||
+
+속성이 잇는지 확인하기
+|| 요소 객체.hasAttribute(속성 이름) ||
+
+속성 삭제하기
+|| 요소 객체.removeAttribute(속성 이름) ||
+
+전체 속성의 목록 가져오기
+요소 객체에는 attributes 프로퍼티가 정의되어 잇다. 
+이 프로퍼티는 NamedNodeMap 객체로 그 요소에 설정된 모든 속성의 속성 노드 객체가 담겨 있다. 
+또한 NameNodeMap 객체는 유사배열 객체이며 읽기 전용이다. 
