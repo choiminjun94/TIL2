@@ -651,3 +651,102 @@ p, #title
 요소 객체에는 attributes 프로퍼티가 정의되어 잇다. 
 이 프로퍼티는 NamedNodeMap 객체로 그 요소에 설정된 모든 속성의 속성 노드 객체가 담겨 있다. 
 또한 NameNodeMap 객체는 유사배열 객체이며 읽기 전용이다. 
+
+====================
+
+15장
+이벤트 처리
+
+이벤트 처리기를 등록하는 방법
+
+1. HTML 요소의 이벤트 처리기 속성에 설정하는 방법
+<input type="button" onClick="changeColor();">
+
+2. DOM요소 객체의 이벤트 처리기 프로퍼티에 설정하는 방법
+let btn = document.getElementById("button")
+btn.onclick = changeColor();
+
+3. addEventListener 메서드를 사용하는 방법
+let btn = document.getElementById("button")
+btn.addEventListener("click", changeColor, false)
+
+이벤트 리스너를 등록하고 삭제하는 방법
+addEventListener로 등록한 함수는 이벤트 리스너라는 이름으로 부른다. addEventListener메서드를 이용하면 같은 요소의 같은 이벤트에 이벤트 리스너를 여러 개 등록할 수 있다. 
+
+|| target.addEventListener(type, listener, useCapture) ||
+
+구성 요소의 의미
+
+- target : 이벤트 리스너를 등록할 DOM 노드
+- type : 이벤트 유형을 뜻하는 문자열("click", "mouseup")
+- listener : 이벤트가 발생했을 때 처리를 담당하는 콜백 함수의 참조
+- useCapture : 이벤트 단계
+
+useCapture는 다음 값 중 하나가 될 수 있다.
+
+- true : 캡처링 단계
+- false : 버블링 단계(생략했을 때의 기본값)
+
+addEventListener를 사용해서 얻을 수 있는 장점
+- 같은 요소의 같은 이벤트에 이벤트 리스너를 여러 개 등록할 수 있다. 
+- HTML요소를 포함한 모든 DOM 노드에 이벤트 리스너를 등록할 수 있다. 
+
+removeEventListener 메서드로 이벤트 리스너 삭제하기
+
+|| target.removeEventListener(type, listener, useCapture) || 
+
+이벤트 객체 
+
+이벤트 처리기와 이벤트 리스너는 이벤트 객체를 인수 받는다.
+ex) 
+
+function changeColor(e){
+    e.currentTarget.style.backgroundColor ="red";
+}
+이 함수의 인수 e가 이벤트 객체이다. e는 event를 나타내는 관례이다.
+
+이벤트 객체의 공통 프로퍼티
+
+- 프로퍼티             | 값의 타입       | 설명
+
+- type                - 문자           - 이벤트 이름
+- target              - 요소객체        - 이벤트가 발생한 요소
+- currentTarget       - 요소객체        - 처리를 담당하는 이벤트 리스너가 등록된 요소 객체
+- eventPhase          - 정수           - 이벤트 전파 단계(1. 캡처링 단계, 2. 타깃 단계, 3.버블링 단계)
+- timeStamp           - 정수           - 이벤트 발생 시간
+- bubbles             - 논리값          - 버블링 단계인지를 뜻하는 값 
+- cancelable          - 논리값          - preventDefault()로 기본 이벤트를 취소할 수 잇는지 뜻하는 값  
+- defaultPrevented    - 논리값          - preventDefault()로 기본 작업이 취소 되었는지를 뜻하는 값
+- isTrustred          - 논리값          - 해당 이벤트가 사용자의 액션에 의해 생성 되었는지를 뜻하는 값 
+
+이벤트의 전파
+
+이벤트의 단계
+
+- 이벤트가 발생한 요소는 이벤트 타깃이라고 한다. 또한 이벤트를 발생시키는 것을 가리켜 이벤트를 발사 한다고 표현
+
+1. 캡처링 단계
+- 이벤트가 window 객체에서 출발해서 DOM트리를 타고 이벤트 타깃까지 전파. 
+
+2. 타깃 단계
+- 이벤트가 이벤트 타깃에 전파되는 단계. 이벤트 타깃에 등록된 이벤트 처리기가 이벤트 리스너는 이 시점에 실행
+
+3. 버블링 단계
+- 이벤트가 이벤트 타깃에서 출발해서 DOM트리를 타고 window 객체까지  전파된다. 
+- 이 단계에 반응하도록 등록된 이벤트 리스너는 이벤트가 발생한 요소에 등록된 이벤트 처리기나 이벤트 리스너 다음에 실행
+- 이 단계는 이벤트가 거품이 올라오는 것 처럼 DOM 트리 아래에서부터 위로 올라온다는 뜻에서 버블링 단계라고 한다.
+
+이벤트의 전파
+자식 요소에서 발생한 이벤트는 부모 요소에도 전파. 이 때문에 의도 하지 않는 동작을 할 때가 있다. 
+
+이벤트의 전파 취소하기 : stopPropagation 메소드
+event.stopPropagation();
+
+이벤트 전파의 일시 정지 : stopImmediatePropagation 메서드
+이벤트 리스너 안에서 요소 객체의 stopImmediatePropagation 메서드를 호출하면 그 다음 요소로의 이벤트 전파가 일시적으로 멈춥니다. 
+또한 그 요소 객체의 그 이벤트에 등록한 다른 이벤트 리스너도 일시적으로 멈춥니다. 
+
+event.stopImmediatePropagation();
+
+기본 동작 취소하기 : preventDefault 메서드
+event.preventDefault();

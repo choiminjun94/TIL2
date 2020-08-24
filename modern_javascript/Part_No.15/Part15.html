@@ -1,0 +1,202 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 리스너를 등록하고 삭제하는 방법</title>
+    <script>
+        window.onload = function(){
+            let element = document.getElementById("box");
+            element.addEventListener("click", function(e){
+                e.currentTarget.style.backgroundColor = "red"
+                console.log("클릭했습니다.");
+                
+            }, false)
+        }
+    </script>
+</head>
+<body>
+    <div id="box">클릭 하세요</div>
+</body>
+</html> -->
+
+<!-- e는 이벤트 객체이며 이벤트 객체 안에는 발생한 이벤트의 다양한 정보가 담겨 있다.-->
+<!-- e.currentTarget는 클릭한 요소를 참조하는 요소 객체입니다.  -->
+<!-- 이벤트 유형을 뜻하는 문자열이 "onClick"이 아니라 "click"이다.-->
+<!-- false을 사용한 이유는 이벤트의 전파 단계가 버블링 단계일 때 그 이벤트를 캡처하라는 뜻이다. -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 리스너를 등록하고 삭제하는 방법</title>
+    <script>
+       window.onload = function(){
+           let element = document.getElementById("box")
+           element.addEventListener("click", changeColor, false)
+       };
+
+       function changeColor(e){
+           e.currentTarget.style.backgroundColor = "red"
+           console.log("클릭 했습니다.");
+       }
+    </script>
+</head>
+<body>
+    <div id="box">클릭 하세요</div>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>removeEventListener 메서드로 이벤트 리스너  삭제하기</title>
+    <script>
+        window.onload = function(){
+            let element = document.getElementById("button");
+            element.addEventListener("click",function(){
+                console.log("클릭했습니다.");
+                element.removeEventListener("click", arguments.callee, false)
+                //removeEventListener를 호출해서 이벤ㅌ 리스너가 스스로 삭제
+                //이때 listener에 arguments.callee를 넘긴다.
+                console.log("스스로 삭제 되었습니다.");
+            },false)
+        }
+    </script>
+</head>
+<body>
+    <button id="button">클릭</button>
+</body>
+</html> -->
+
+<!-- 버블링 단계 -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>버블링 예제</title>
+    <script>
+        window.onload = function(){
+            let outer = document.getElementById("outer");
+            let inner = document.getElementById("inner2");
+            outer.addEventListener("click", function(e){
+                console.log("outer bubbling");
+            }, false)
+            outer.addEventListener("click", function(e){
+                console.log("outer capturing");
+            },true)
+            inner2.addEventListener("click", function(e){
+                console.log("inner2 bubbling");
+            }, false)
+        }
+    </script>
+</head>
+<body>
+    <div id="outer">
+        outer
+        <div id="inner1">inner1</div>
+        <div id="inner2">inner2</div>
+    </div>
+</body>
+</html>
+ -->
+
+ <!-- 이벤트 전파의 취소 -->
+ <!-- <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>이벤트 전파의 취소</title>
+     <script>
+         window.onload = function(){
+             let outer = document.getElementById("outer");
+             let inner = document.getElementById("inner2");
+             
+             outer.addEventListener("click", function(e){
+                 console.log("outer bubbling");
+             }, false)
+             outer.addEventListener("click", function(e){
+                 console.log("outer capturing");
+             },true)
+             inner2.addEventListener("click", function(e){
+                 console.log("inner2 (1)");
+                 e.stopPropagation(); // 이벤트의 전파를 취소
+             }, false)
+             inner2.addEventListener("click", function(e){
+                 console.log("inner2 (2)");
+             },false)
+         }
+     </script>
+ </head>
+ <body>
+     <div id="outer">
+         outer
+         <div id="inner1">inner1</div>
+         <div id="inner2">inner2</div>
+     </div>
+ </body>
+ </html> -->
+
+ <!-- 이벤트 전파의 일시 정지 -->
+ <!-- <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>이벤트 전파의 일시 정지</title>
+     <script>
+         window.onload = function(){
+             let outer = document.getElementById("outer");
+             let inner = document.getElementById("inner2");
+             
+             outer.addEventListener("click", function(e){
+                 console.log("outer bubbling");
+             }, false)
+             outer.addEventListener("click", function(e){
+                 console.log("outer capturing");
+             },true)
+             inner2.addEventListener("click", function(e){
+                 console.log("inner2 (1)");
+                 e.stopImmediatePropagation(); // 이벤트의 전파의 일시 정지
+             }, false)
+             inner2.addEventListener("click", function(e){
+                 console.log("inner2 (2)");
+             },false)
+         }
+     </script>
+ </head>
+ <body>
+     <div id="outer">
+         outer
+         <div id="inner1">inner1</div>
+         <div id="inner2">inner2</div>
+     </div>
+ </body>
+ </html> -->
+
+ <!-- 기본 동작 취소하기 -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>기본 동작 취소하기</title>
+     <script>
+         window.onload = function(){
+             let anchor = document.getElementById("clien")
+             anchor.addEventListener("click", function(e){
+                 if(!confirm("페이지를 이동하시겠습니까?")) e.preventDefault();
+             }, false)
+         }
+     </script>
+ </head>
+ <body>
+     <a id = "clien" href="https://www.clien.net/service/">클리앙</a>
+ </body>
+ </html>
