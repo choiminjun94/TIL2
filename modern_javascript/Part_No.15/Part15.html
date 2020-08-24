@@ -374,7 +374,7 @@
 
 <!-- 함수를 반환하는 함수를 이벤트 리스너로 등록하기-->
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -397,4 +397,40 @@
 <body>
     <div id="box">click me</div>
 </body>
-</html> 
+</html>  -->
+
+<!-- 이벤트 보내기 -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 보내기</title>
+    <script>
+        window.onload = function(){
+            let event = document.createEvent("HTMLEvents")
+            event.initEvent("click", true, false)
+            let button = document.getElementById("button");
+            button.addEventListener("click", function(event){
+                alert(`event.cancelable: ${event.cancelable}`)
+            });
+            button.dispatchEvent(event);
+        }
+    </script>
+</head>
+<body>
+    <button id="button">버튼</button>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>

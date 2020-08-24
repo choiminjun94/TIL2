@@ -779,3 +779,56 @@ addEventListener 메서드의 두번째 인수는 함수지만 함수 대신에 
 이벤트 객체를 인수로 받는 함수를 반환하는 함수를 정의해서 그 함수가 반환한 함수를 이벤트 처리기로 등록하는 방법
 
 커스텀 이벤트 
+생성하는 방법
+createEvent 메서드로 이벤트 객체를 생성한 다음에 초기화 함수 안에서 이벤트 객체를 초기화 한다.
+그 다음에 이벤트를 받을 요소 객체에 대해 dispatchEvent 메서드를 호출해서 이벤트를 보낸다.(dispatch)
+
+객체 생성
+
+|| let event = document.createEvent(type); ||
+type에 사용 가능한것은 밑에 정리
+
+||type              ||설명                      ||이벤트 객체의 초기화 메서드
+- UIEvents            - 사용자 인터페이스 이벤트       - evnet.initUIEvent
+- MouseEvents         - 마우스 이벤트               - event.initMouseEvent
+- TextEvent           - 텍스트 이벤트               - event.initTextEvent
+- KeyboardEvent       - 키보드 이벤트               - event.initKeyEvent          
+- MutationEvents      - 변이 이벤트                - event.initMutationEvent          
+- HTMLEvents          - HTML 이벤트               - event.initEvent        
+- CustomEvent         - 사용자 지정 이벤트           - event.initCustomEvent               
+
+생성된 이벤트 객체는 해당 이벤트의 타입에 따라 별도의 초기화 메서드로 초기화 작업을 해야 한다. 밑에는 예를 들어보겟다.
+
+|| event.initEvent(type, bubbles, cancelable); ||
+
+각각 인수의 뜻
+type : 이벤트 유형을 뜻하는 문자열 ("click" "mouseup")
+bubbles : 버블링할지를 나타내는 논리값
+cancelable : 취소할 수 잇는 이벤트로 만들지를 나타내는 논리값
+
+이벤트 보내기
+
+이벤트는 요소 객체의 dispatchEvent 메서드로 보낸다. 
+|| target.dispatchEvent(event) ||
+
+비동기 처리를 간결하게 작성하는 Promise
+
+Promise의 기본
+
+Promise는 비동기 처리를 실행하고 그 처리를 실행하고 그 처리가 끝난 후에 다음 처리를 실행하기 위한 용도로 사용. 
+|| let promise = new Promise(function(resolve, reject){ ... })
+
+resolve : 함수 안의 처리가 끝났을 때 호출해야 하는 콜백 함수, resolve함수에는 어떠한 값도 인수로 넘길 수 있다. 이 값은 다음 처리를 실행하는 함수에 전달
+
+reject  : 함수 안의 처리가 실패햇을 때 호출해야 하는 콜백 함수, reject함수에는 어떠한 값도 인수로 넘길 수 잇다. 대부분의 경우 오류 메시지 문자열을 인수로 사용
+
+
+Promise를 종류시키는 resolve함수와 then 메소드
+
+resolve 함수는 promise를 종류시킨다. resolve 함수에 인수로 넘긴 값은 then 메서드에 인수로 넘긴 함수에 전달 되어 다음 처리를 위해 사용
+|| promise.then(onFullfilled); ||
+
+onFullfilled 함수는 성공 콜백 함수라고 하며 promise 안의 처리가 정상적으로 끝났을 때 호출 되는 함수.
+
+
+
