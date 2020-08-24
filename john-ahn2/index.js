@@ -35,5 +35,26 @@ app.post("/register", (req, res)=>{
         })
     })
 })
+app.post('./login', (req, res)=>{
+  //요청된 이메일을 db에서 찾는다.
+    User.findOneAndDelete({email : req.boby.email}, (err,user)=>{
+      //emaill이 존재하지 않을시
+        if(!user){
+          return res.json({
+            loginSuccess:false,
+            message: "제공된 이메일에 해당하는 유저가 없습니다."
+          })
+        }
+        //용청된 이메일이 데이터에 있다면 비밀번호가 맞는 비번인지 확인
+        user.comparPassword(req.body.password, (err, isMatch) => {
+          if(!isMatch)
+          return res.json({loginSuccess: false, message:"비밀번호가 틀림"})
 
+            //비번까지 맞다면 토큰을 생성하기
+            user.generateToken((err,user)=>{
+
+            })
+        })
+    })
+})
 app.listen(port, () => console.log(`express app ${port}!`));
