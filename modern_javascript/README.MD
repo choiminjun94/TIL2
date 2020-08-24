@@ -830,5 +830,6 @@ resolve 함수는 promise를 종류시킨다. resolve 함수에 인수로 넘긴
 
 onFullfilled 함수는 성공 콜백 함수라고 하며 promise 안의 처리가 정상적으로 끝났을 때 호출 되는 함수.
 
+-- 추가할 이 내용 좀더 있다 --
 
 
