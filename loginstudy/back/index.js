@@ -2,10 +2,12 @@ const express = require('express')
 const app = express()
 const port = 5000
 const bodyParser = require("body-parser")
+const cookieParser = require('cookie-parser') 
 const{User} = require('./Model/Uesr');
 const config = require("./Config/key")
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
+app.use(cookieParser());
 
 const mongoose = require('mongoose')
 
@@ -53,7 +55,13 @@ app.post('/login', (req,res)=>{
 
                 // 비밀번호까지 맞다면 토큰을 생성하기
                 user.generateToken((err, user)=>{
-                    
+                    if(err) return res.status(400).send(err)
+
+                    //토큰을 저장한다. 어디에 ?? -> 쿠키, 로컬스토리지(각지 장단점이 있다.)
+                    //쿠키에 저장
+                    res.cookie("x_auth", user.token )
+                    .status(200)
+                    .json({loginSuccess: true, userId: user._id})
                 })
         })  
     })

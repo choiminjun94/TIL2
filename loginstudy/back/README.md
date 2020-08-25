@@ -27,3 +27,12 @@ bcrypt 설치
 
 npm install bcrypt --save
 참고 사이트: https://www.npmjs.com/package/bcrypt
+
+jsonwebtoken 설치
+npm install jsonwebtoken --save
+참고 사이트: https://www.npmjs.com/package/jsonwebtoken
+
+cookie-parser 설치
+
+npm install cookie-parser --save
+참고 사이트: https://www.npmjs.com/package/cookie-parser

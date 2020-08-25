@@ -1,13 +1,14 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
+const jwt = require('jsonwebtoken')
 //saltRounds가 몇자리인지 설정
 //salt을 이용해 암호화 한다.
 
 const userSchema = mongoose.Schema({
   id: {
     type: String,
-    maxlength: 10,
+    maxlength: 50,
     trim: true,
     match:[/^.{4,12}$/,'Should be 4-12 characters!'],
     // match:[/^[{4,12}]+\.[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]$/,'Should be a vaild email address!'],
@@ -20,7 +21,7 @@ const userSchema = mongoose.Schema({
   },
   password: {
     type: String, 
-    maxlength: 50,
+    maxlength: 100,
   },
 
   role: {
@@ -74,10 +75,21 @@ userSchema.pre("save", function (next) {
 userSchema.methods.comparePassword = function(plainPassword, cb){
   // plainPassword 암호화된 비번 찾은지 찾기
   bcrypt.compare(plainPassword, this.password, function(err, isMatch){
-    if(err) return cb(err),
+    if(err) return cb(err);
      cb(null, isMatch)
   })
+}
+userSchema.methods.generateToken = function(cb){
+  let user = this;
+  //jsonwebToken을 이용해서 token을 생성하기
+  const token = jwt.sign(user._id.toHexString(), 'secretToekn')
 
+  user.token = token
+  user.save(function(err, user){
+    if(err) return cb(err)
+     cb(null, user)
+  })
+  // user._id +'secretToekn' = token // 이 토큰을 가지고 누구인지 알수 있다.
 }
 
 const User = mongoose.model("User", userSchema);
