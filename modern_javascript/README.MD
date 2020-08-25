@@ -823,7 +823,7 @@ resolve : 함수 안의 처리가 끝났을 때 호출해야 하는 콜백 함�
 reject  : 함수 안의 처리가 실패햇을 때 호출해야 하는 콜백 함수, reject함수에는 어떠한 값도 인수로 넘길 수 잇다. 대부분의 경우 오류 메시지 문자열을 인수로 사용
 
 
-Promise를 종류시키는 resolve함수와 then 메소드
+Promise를 종료시키는 resolve함수와 then 메소드
 
 resolve 함수는 promise를 종류시킨다. resolve 함수에 인수로 넘긴 값은 then 메서드에 인수로 넘긴 함수에 전달 되어 다음 처리를 위해 사용
 || promise.then(onFullfilled); ||
@@ -831,5 +831,24 @@ resolve 함수는 promise를 종류시킨다. resolve 함수에 인수로 넘긴
 onFullfilled 함수는 성공 콜백 함수라고 하며 promise 안의 처리가 정상적으로 끝났을 때 호출 되는 함수.
 
 -- 추가할 이 내용 좀더 있다 --
+
+Promise를 실패로 처리하는 reject 함수와 catch 메서드
+
+reject함수는 Promise를 종료시킨다. resolve함수와 마찬가지로 reject함수에도 값을 넘길 수 있다.
+reject 함수가 실행되면 then메서드에 넘긴 함수는 실행 되지 않는다. 그 대신 catch 메서드에 넘긴 함수가 실행
+|| promise.catch(onRejected); ||
+
+then의 두번째 인수 
+then 메서드에는 두 번째 인수로 실패 콜백 함수를 지정할 수 있다. 
+그러면 then 메서드에서 처리할 내용과 catch 메서드에서 처리할 내용을 then 메서드 하나로 작성할 수 있다.
+두번째 인수를 지정한 then의 사용법은 밑과 같다.
+
+|| promise.then(onFullfilled, onRejected) ||
+
+Promise가 실행하는 콜백함수에 인수 넘기기 
+
+
+
+
 
 

@@ -1,19 +1,22 @@
 const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema({
-    name:{
+    id:{
         type: String,
-        maxlength: 50
+        maxlength: 10,
+        trim:true,
     },
     email:{
         type: String,
         trim: true, // 공백 없애주는 역할
-        unique: 1 // 똑같은 email을 한번만 쓰게 해주는 역할
+        unique: true // 똑같은 email을 한번만 쓰게 해주는 역할
     },
     password:{
         type: String,
-        maxlength:50
+        maxlength:50,
+        
     },
+
     role:{
         type:Number,
         default: 0 
@@ -21,6 +24,7 @@ const userSchema = mongoose.Schema({
     },
 
     image: String,
+
 
     token:{
         type:String,

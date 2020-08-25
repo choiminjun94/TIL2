@@ -1,13 +1,21 @@
-//Promise를 종류시키는 resolve함수와 then 메소드
-// 크롬 계발자 모드 console에 입력
-let promise = new Promise(function(resolve, reject){
-    setTimeout(function(){
-        let name = prompt("이름 입력");
-        resolve(name);
-    },1000)
-});
-
-promise.then(function(name){
-    console.log("안녕하세여, " +name+ "님!");
-    
-})
+function buyAsync(mymoney){
+    return new Promise(function(resolve, reject){
+      setTimeout(function(){
+          let payment = parseInt(prompt("지블하고자 하는 금액을 입력"))
+          let balance = mymoney - payment;
+          if(balance > 0){
+              console.log(`${payment}원을 지불했습니다.`);
+              resolve(balance)
+          }else{
+              reject(`잔액은 ${payment}원 입니다. 구매 할 수 없습니다.`)
+          }
+      },1000)  
+    })
+}
+buyAsync(500)
+    .then(function(balance){
+        console.log(`잔액은 ${balance}원 입니다.`);
+    })
+    .catch(function(error){
+        console.log(error);
+    })
