@@ -91,7 +91,22 @@ userSchema.methods.generateToken = function(cb){
   })
   // user._id +'secretToekn' = token // 이 토큰을 가지고 누구인지 알수 있다.
 }
+// 미들웨어에서 사용하는 부분
+userSchema.statics.findByToken = function(token, cb){
+  let user = this; 
 
+  //토큰을 decode 즉 복구하는 과정 - webtoken 공식 문서에 존재
+  jwt.verify(token, 'secretToekn', function(err, decode){
+    //유저 아이디를 이용해서 유저를 찾은 다음에 
+    //클라이언트에서 가져온 Token과 db에서 보관된 토큰이 일치하는 확인
+    user.findOne({"_id":decode, "token": token}, function(err, user){
+
+      if(err) return cb(err)
+      cb(null, user)
+    })
+
+  })
+}
 const User = mongoose.model("User", userSchema);
 
 

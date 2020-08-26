@@ -5,6 +5,7 @@ const bodyParser = require("body-parser")
 const cookieParser = require('cookie-parser') 
 const{User} = require('./Model/Uesr');
 const config = require("./Config/key")
+const {auth} = require('./middleware/auth')
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use(cookieParser());
@@ -22,7 +23,7 @@ mongoose.connect(config.mongoURI,{
 }).then(()=>console.log('접속되었습니다.')).catch(err=>console.log(err))
 
 //회원 가입 라우트 
-app.post("/register", (req,res)=>{
+app.post("/api/user/register", (req,res)=>{
     
     //회원 가입 할때 필요한 정보들을 client에서 가져오면
     //그것들을 데이터 베이스에 넣어준다.
@@ -38,7 +39,7 @@ app.post("/register", (req,res)=>{
 })
 
 //로그인 route 만들기
-app.post('/login', (req,res)=>{
+app.post('/api/user/login', (req,res)=>{
 
     // 요청된 이메일이 db에 있는지 화인
     User.findOne({email: req.body.email}, (err,user)=>{
@@ -65,7 +66,34 @@ app.post('/login', (req,res)=>{
                 })
         })  
     })
+})
 
+app.get('/api/users/auth',auth, (req,res)=>{
+    //여기까지 미들웨어를 통과해 왔다는 애기는 Authentication이 true 라는 말
+    res.status(200).json({
+        _id:req.user._id,
+        isAdmin: req.user.role === 0 ? false: true,
+        isAuth: true, 
+        email: req.user.email,
+        id: req.user.id,
+        role: req.user.role,
+        image: req.user.image
+    })
+})
+//auth - 미들웨어
+
+//로그아웃 라우트
+app.get('/api/users/logout', auth, (req, res) => {
+    User.findOneAndUpdate({_id:req.user._id}, 
+        //_id:req.user._id는 auth 미들웨어에서 가져와서 찾는다.
+    {token: ""},//    토큰을 삭제 해준다.
+    (err, user)=>{
+        if(err) return res.json({success: false, err});
+        return res.status(200).send({
+            success: true
+        })
+    })
 })
 
 app.listen(port, ()=>console.log(`express app ${port}`))
+
