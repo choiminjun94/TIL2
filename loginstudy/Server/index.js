@@ -1,6 +1,5 @@
 const express = require('express')
 const app = express()
-const port = 5000
 const bodyParser = require("body-parser")
 const cookieParser = require('cookie-parser') 
 const{User} = require('./Model/Uesr');
@@ -21,6 +20,9 @@ mongoose.connect(config.mongoURI,{
     //버전업그레이드 같은걸 할떄 필요없는 부분을 없애거나 다른걸로 대체 할때 이렇게 되는데  그렇게 되면  
     //mongoose 를 사용하는 유저들이  에러가 나거나 warning 문구들을  로그에서 보게 돼요.
 }).then(()=>console.log('접속되었습니다.')).catch(err=>console.log(err))
+
+//cliend 테스트 용도
+app.get('/api/hello', (req,res) => res.send('hello world'))
 
 //회원 가입 라우트 
 app.post("/api/user/register", (req,res)=>{
@@ -94,6 +96,6 @@ app.get('/api/users/logout', auth, (req, res) => {
         })
     })
 })
-
+const port = 5000
 app.listen(port, ()=>console.log(`express app ${port}`))
 
