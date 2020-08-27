@@ -22,6 +22,7 @@ const userSchema = mongoose.Schema({
   password: {
     type: String, 
     maxlength: 100,
+    match:[/^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/]
   },
 
   role: {
