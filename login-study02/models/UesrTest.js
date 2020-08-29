@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const userSchema = mongoose.Schema({
+const userTestSchema = mongoose.Schema({
   name: {
     type: String,
     maxlength: 50,
@@ -36,9 +36,9 @@ const userSchema = mongoose.Schema({
   //토큰 유효기간
 }); 
 
-const User = mongoose.model('User',userSchema)
+const UserTest = mongoose.model('UserTest',userTestSchema)
 // 먼저 모델의 이름 || 나중엔 모델 스키마 작성
 // 스카마를 모델로 감싸준다
 
-module.exports = {User}
+module.exports = {UserTest}
 // 다른 곳에서도 쓸수 있게 export를 해준다
