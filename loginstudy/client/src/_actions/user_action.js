@@ -27,6 +27,7 @@ export function registerUser(dataToSubmit) {
     }
 }
 
+
 //dataTosubmit가
 // let body ={
 //     email: Email,
