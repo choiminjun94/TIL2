@@ -11,3 +11,11 @@ npm install body-parser --save
 
 4. nodemon 설치
 npm install nodemon --save -dev
+
+5. bcrypt install 
+npm install bcrypt --save 
+
+6. npm install jsonwebtoken --save
+
+7.npm install cookie-parser --save
+쿠키에 
