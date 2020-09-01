@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Axios from 'axios'
+import axios from "axios";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../../_actions/user_action";
 
@@ -15,6 +15,19 @@ function LoginPage(props) {
   const onPasswordHeader = (e) => {
     setPassword(e.currentTarget.value);
   };
+  const onClickHandler = () => {
+   
+      axios.get("/api/users/logout").then((response) => {
+        if (response.data.success) {
+  
+          props.history.push("/logout");
+          alert("로그아웃 성공")
+        } else {
+          alert("로그아웃 실패");
+        }
+      }); 
+  };
+
   const onSubmitHandler = (e) => {
     e.preventDefault(); // 가 없으면 페이지가 리프레시 됨 // 다음 작업이 진해이 안됨
 
@@ -23,14 +36,14 @@ function LoginPage(props) {
       password: Password,
     };
     dispatch(loginUser(body)) // dispatch안의 loginUser는 acticn이다.
-    .then(response =>{
-        if(response.payload.loginSuccess){
-            props.history.push('/')
-        }else{
-            alert('Error')
+      .then((response) => {
+        if (response.payload.loginSuccess) {
+          props.history.push("/");
+        } else {
+          alert("Error");
         }
-    })
-  }
+      });
+  };
 
   return (
     <div
@@ -52,6 +65,8 @@ function LoginPage(props) {
         <input type="password" value={Password} onChange={onPasswordHeader} />
         <br />
         <button>Login</button>
+        <button onClick={onClickHandler}>로그아웃</button>
+
       </form>
     </div>
   );

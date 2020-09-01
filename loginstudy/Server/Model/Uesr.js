@@ -91,6 +91,8 @@ userSchema.methods.generateToken = function(cb){
      cb(null, user)
   })
   // user._id +'secretToekn' = token // 이 토큰을 가지고 누구인지 알수 있다.
+
+  
 }
 // 미들웨어에서 사용하는 부분
 userSchema.statics.findByToken = function(token, cb){

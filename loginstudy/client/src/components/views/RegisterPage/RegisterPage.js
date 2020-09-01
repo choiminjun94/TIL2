@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../../_actions/user_action";
+import { response } from "express";
 
 function RegisterPage(props) {
     const dispatch = useDispatch();
@@ -27,21 +28,12 @@ function RegisterPage(props) {
   const onSubmitHandler = (e) => {
     e.preventDefault(); // 가 없으면 페이지가 리프레시 됨 // 다음 작업이 진해이 안됨
 
-    // if(Name.body(Name) !==4,12){
-    //     return alert("id가 길이가 짧습니다..")
-    // }
-
-    // if(Password !== ConfirmPassword){
-    //     return alert('비밀번호와 비밀번호 확인은 같아야 합니다.')
-    // }
-    // if(Email == Email){
-    //     return alert("이미 존재하는 email입니다.")
-    // }
+    
 
     let body = {
       email: Email,
       password: Password,
-      name:Name
+      name:Name,
     };
 
     dispatch(registerUser(body)) // dispatch안의 loginUser는 acticn이다.

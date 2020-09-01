@@ -9,7 +9,7 @@ import {
 import LandingPage from './components/views/LandingPage/LandingPage'
 import LoginPage from './components/views/LoginPage/LoginPage';
 import RegisterPage from './components/views/RegisterPage/RegisterPage';
-
+import Logout from './components/views/LogoutPaga/LogoutPage'
 function App() {
   return (
     <Router>
@@ -18,6 +18,8 @@ function App() {
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/register" component={RegisterPage} />
+          <Route exact path="/Logout" component={Logout} />
+
         </Switch>
       </div>
     </Router>

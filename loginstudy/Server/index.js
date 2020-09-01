@@ -65,10 +65,46 @@ app.post('/api/user/login', (req,res)=>{
                     res.cookie("x_auth", user.token )
                     .status(200)
                     .json({loginSuccess: true, userId: user._id})
-                })
+            })
         })  
+        user.deleteOne((err,userInfo)=>{
+            if(err) return res.json({success: false, err})
+            return res.status(200).json({
+                success: true
+            })
+        })
     })
 })
+
+// //탈퇴 route 만들기
+// app.post('/api/user/delet', (req,res)=>{
+
+//     // 요청된 이메일이 db에 있는지 화인
+//     User.findOne({email: req.body.email}, (err,user)=>{
+//         if(!user){
+//             return res.json({
+//                 loginSuccess: false,
+//                 message: "해당되는 유저가 없습니다."
+//             })
+//         }
+//         // 요청된 이메일이 있다면 맞는지 확인
+//         user.comparePassword(req.body.password, (err, isMatch)=>{
+//             if(!isMatch)
+//             return res.json({loginSuccess: false, message:"비번이 틀렸습니다."})
+
+//                 // 비밀번호까지 맞다면 토큰을 생성하기
+//                 user.generateToken((err, user)=>{
+//                     if(err) return res.status(400).send(err)
+
+//                     //토큰을 저장한다. 어디에 ?? -> 쿠키, 로컬스토리지(각지 장단점이 있다.)
+//                     //쿠키에 저장
+//                     res.cookie("x_auth", user.token )
+//                     .status(200)
+//                     .json({loginSuccess: true, userId: user._id})
+//                 })
+//         })  
+//     })
+// })
 
 app.get('/api/users/auth',auth, (req,res)=>{
     //여기까지 미들웨어를 통과해 왔다는 애기는 Authentication이 true 라는 말
@@ -96,6 +132,6 @@ app.get('/api/users/logout', auth, (req, res) => {
         })
     })
 })
-const port = 5000
+const port = 1000
 app.listen(port, ()=>console.log(`express app ${port}`))
 

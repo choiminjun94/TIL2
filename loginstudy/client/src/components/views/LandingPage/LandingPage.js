@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 
-function LandingPage() {
+function LandingPage(props) {
   useEffect(() => {
     //   axios.get('/api/hello') // 엔드 포인트를 server로 보낸다. server폴더의 index.js
     axios.get("/api/hello").then((response) => {
@@ -9,6 +9,7 @@ function LandingPage() {
     });
     // LandingPage에 들어오자 마자 useEffect를 실행
   }, []);
+
   return (
     <div
       style={{
@@ -19,8 +20,9 @@ function LandingPage() {
         height: "100vh",
       }}
     >
-      
-      <h2><strong>시작 페이지</strong></h2>
+      <h2>
+        <strong>시작 페이지</strong>
+      </h2>
     </div>
   );
 }
