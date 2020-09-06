@@ -24,3 +24,10 @@ next는 서버가 돌아갈때 파일을 새로 만들면 인식을 못함
 
 prop-types 설치
  npm i prop-types
+
+ eslint 설치
+ npm i eslint -D
+ npm i eslint-plugin-import -D
+ npm i eslint-plugin-react -D
+ npm i eslint-plugin-react-hooks -D
+ -D는 개발자 모드이다. 
