@@ -37,4 +37,6 @@ npm i antd styled-components
 
 antd icons 설치
 npm i @ant-design/icons
-ic
+
+_APP.JS 전부 공동 
+AppLayout 일부 공통 메뉴
