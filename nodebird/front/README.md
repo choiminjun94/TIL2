@@ -40,3 +40,9 @@ npm i @ant-design/icons
 
 _APP.JS 전부 공동 
 AppLayout 일부 공통 메뉴
+
+gutter 컬럼 사이의 간격
+
+target="_blank" 
+target="_blank"의 보안성 위해 rel="noreferrer noopener
+

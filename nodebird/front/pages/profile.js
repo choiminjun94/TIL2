@@ -8,7 +8,7 @@ const Profile = () => {
       <Head>
         <title>내 프로필 | Nodebird</title>
       </Head>
-      <AppLayout>프로필 페이지</AppLayout>;
+      <AppLayout>프로필 페이지</AppLayout>
     </>
   );
 };
