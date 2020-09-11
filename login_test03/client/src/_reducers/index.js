@@ -1,12 +1,11 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import user from './user_reducer';
 
 const rootReducer = combineReducers({
-
-    user,
+    user
 })
 
-export default rootReducer
+export default rootReducer;
 // 다른 곳 에서도 사용 할수 있게
 
 // combineReducers - store에 여러가지 reducer가 존재 할 수 잇다.

@@ -43,7 +43,7 @@ app.post("/register", (req, res) => {
 });
 
 //로그인 route 만들기
-app.post("/login", (req, res) => {
+app.post("/api/user/login", (req, res) => {
   // 요청된 이메일이 db에 있는지 화인
   User.findOne({ email: req.body.email }, (err, user) => {
     if (!user) {
