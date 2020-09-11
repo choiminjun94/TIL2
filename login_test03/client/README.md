@@ -6,3 +6,4 @@ Axios사용
 
 concurrently 
 
+// useState 단축어 uses
