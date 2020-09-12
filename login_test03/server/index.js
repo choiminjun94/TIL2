@@ -85,7 +85,7 @@ app.get("/auth", auth, (req, res) => {
 });
 
 // 로그아웃
-app.get('/logout', auth, (req, res) => {
+app.get('/api/users/logout', auth, (req, res) => {
   User.findOneAndUpdate({_id:req.user._id}, 
       //_id:req.user._id는 auth 미들웨어에서 가져와서 찾는다.
   {token: ""},//    토큰을 삭제 해준다.
@@ -97,6 +97,7 @@ app.get('/logout', auth, (req, res) => {
   })
 })
 
+// 회원 삭제
 app.delete('/delete', (req, res) =>{
   User.deleteOne({email: req.body.email, password: req.body.password}, (err, user)=>{
     if(err) return res.json({

@@ -67,13 +67,13 @@ function RegisterPage(props) {
           <input type="email" value={Email} onChange={onEmailHeader} />
 
           <label>name</label>
-          <input type="text" value={Name} onChange={onNamedHeader} pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,}$"maxlength="10" required />
+          <input type="text" value={Name} onChange={onNamedHeader} />
 
           <label>Password</label>
-          <input type="password" value={Password} onChange={onPasswordHeader} pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,}$"maxlength="10" required />
+          <input type="password" value={Password} onChange={onPasswordHeader}  />
 
           <label>Confirm Password</label>
-          <input type="password" value={ConfirmPassword} onChange={onConfirmPasswordHeader} pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,}$"maxlength="10" required  />
+          <input type="password" value={ConfirmPassword} onChange={onConfirmPasswordHeader}/>
           <br />
           <button>회원가입</button>
         </form>
