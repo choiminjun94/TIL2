@@ -72,7 +72,7 @@ app.post("/api/user/login", (req, res) => {
   });
 });
 
-app.get("/auth", auth, (req, res) => {
+app.get("/api/users/auth", auth, (req, res) => {
   res.status(200).json({
     _id: req.user._id,
     isAdmin: req.user.role === 0 ? false : true,
@@ -98,8 +98,8 @@ app.get('/api/users/logout', auth, (req, res) => {
 })
 
 // 회원 삭제
-app.delete('/delete', (req, res) =>{
-  User.deleteOne({email: req.body.email, password: req.body.password}, (err, user)=>{
+app.delete('/api/users/delete', (req, res) =>{
+  User.deleteOne({email: req.body.email}, (err, user)=>{
     if(err) return res.json({
       success:false, err
     })
