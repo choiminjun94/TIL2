@@ -3,7 +3,7 @@ import Dropzone from 'react-dropzone'
 import { Icon } from 'antd'
 import axios from 'axios'
 
-function FileUpload() {
+function FileUpload(props) {
 
 const [Images, setImages] = useState([])
 //useState([]) 몇개의 파일이 올라 갈지 모르기 때문에
@@ -27,10 +27,26 @@ const dropHandler =(files)=>{
         if(response.data.success){
             console.log(response.data);
             setImages([...Images, response.data.filePath ])
+            props.refreshFunction([...Images, response.data.filePath ])
         }else{
             alert("파일 보내기 실패")
         }
     })
+}
+
+const deleteHandler =(image)=>{
+  const currentIndex = Images.indexOf(image)
+  //이미지의 index를 알아 내는 부분
+  // console.log('currentIndex', currentIndex);
+  let  newImages =[...Images]
+  newImages.splice(currentIndex, 1);
+  // 선택 한 이미지에서 부터 1개를 지우겠다.
+  setImages(newImages)
+  console.log('newImages', newImages);
+  props.refreshFunction(newImages)
+  // 이미지를 지우거나 할떄 부모 컴포넌트로 이미지의 변화들이 setImages로 와서 이미지 안의 FileUpload로 보내진다.
+  
+
 }
 
   return (
@@ -52,7 +68,8 @@ const dropHandler =(files)=>{
       {/* 파일을 올리면 사진이 나올수 있게 조치 */}
       <div style={{display: 'flex', width: '350px', height: '240px', overflowX: 'scroll'}}> 
             {Images.map((image, index) =>(
-              <div key={index}>
+              <div onClick={()=>deleteHandler(image)} key={index}>
+                {/* 클릭 할때 이미지 삭제 */}
                 <img style={{minWidth: '300px', width: '300px', height: '240px'}}
                   src={`http://localhost:5000/${image}`}
                 />
