@@ -33,6 +33,16 @@ const dropHandler =(files)=>{
     })
 }
 
+const deleteHandler=(image)=>{
+    const currentIndex = Images.indexOf(image)
+    console.log('currentIndex', currentIndex);
+    let  newImages =[...Images]
+    newImages.splice(currentIndex, 1);
+    // 선택 한 이미지에서 부터 1개를 지우겠다.
+    setImages(newImages)
+
+}
+
   return (
     <div style={{display: 'flex', justifyContent: 'space-between'}}>  
       <Dropzone onDrop={dropHandler}>
@@ -52,7 +62,8 @@ const dropHandler =(files)=>{
       {/* 파일을 올리면 사진이 나올수 있게 조치 */}
       <div style={{display: 'flex', width: '350px', height: '240px', overflowX: 'scroll'}}> 
             {Images.map((image, index) =>(
-              <div key={index}>
+              <div onClick={()=>deleteHandler(image)} key={index}>
+                {/* 클릭 할때 이미지 삭제 */}
                 <img style={{minWidth: '300px', width: '300px', height: '240px'}}
                   src={`http://localhost:5000/${image}`}
                 />
