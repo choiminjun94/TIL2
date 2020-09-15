@@ -6,7 +6,7 @@ import Head from "next/head";
 const Home =()=>{
     return(
       
-        <AppLayout><div>Hello world</div></AppLayout>
+        <AppLayout><div>회원가입 페이지</div></AppLayout>
     
     )
 }
