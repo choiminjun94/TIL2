@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Typography, Button, Form, Input } from "antd";
-
+import FileUpload from '../../utils/FileUPload'
 // const {Title} = Typography
 const { TextArea } = Input;
 
@@ -40,7 +40,9 @@ function UploadProductPage() {
         {/* level이 text 사이즈 이다. */}
         <h2>여행 상품 업로드</h2>
       </div>
+
       <Form>
+          <FileUpload />
         <br />
         <br />
         <label>이름</label>
