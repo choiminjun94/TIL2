@@ -37,4 +37,18 @@ router.post('/', (req,res) => {
   })
 })
 
-module.exports = router;
+router.post('/products', (req,res) => {
+  //product collection에서 들어 있는 모든 상품 가져오기
+  Product.find()
+  .populate("writer")
+  //populate는 $oid로 모두 조회를 해서 자바스크립트 단에서 합쳐주는 것
+  //JOIN처럼 DB 자체에서 합쳐주는 것이 아닙니다.
+  .exec((err, productInfo) =>{
+    if(err) return res.status(400).json({success: false, err})
+    return res.status(200).json({success: true, productInfo})
+  })
+})
+
+
+
+module.exports = router; 
