@@ -3,7 +3,7 @@ import Dropzone from 'react-dropzone'
 import { Icon } from 'antd'
 import axios from 'axios'
 
-function FileUpload() {
+function FileUpload(props) {
 
 const [Images, setImages] = useState([])
 //useState([]) 몇개의 파일이 올라 갈지 모르기 때문에
@@ -27,6 +27,7 @@ const dropHandler =(files)=>{
         if(response.data.success){
             console.log(response.data);
             setImages([...Images, response.data.filePath ])
+            props.refreshFunction([...Images, response.data.filePath])
         }else{
             alert("파일 보내기 실패")
         }
@@ -40,6 +41,8 @@ const deleteHandler=(image)=>{
     newImages.splice(currentIndex, 1);
     // 선택 한 이미지에서 부터 1개를 지우겠다.
     setImages(newImages)
+    props.refreshFunction(newImages)
+
 
 }
 
