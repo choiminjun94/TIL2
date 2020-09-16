@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { FaCode } from "react-icons/fa";
 import axios from "axios";
-import { Icon, Col, Card, Row } from "antd";
+import { Icon, Col, Card, Row, Carousel } from "antd";
 import Meta from "antd/lib/card/Meta";
-
+import ImageSlider from "../../utils/ImageSlider"
 function LandingPage() {
   const [Products, setProducts] = useState([]);
 
@@ -25,7 +25,7 @@ function LandingPage() {
     return (
       <Col lg={6} md={8} xs={25} key={index}>
         <Card
-          cover={<img src={`http://localhost:5000/${product.images[0]}`} />}
+          cover={<ImageSlider images={product.images}/>}
         >
           <Meta title={product.title} description={`$${product.price}`} />
         </Card>
@@ -44,9 +44,9 @@ function LandingPage() {
       {/* Filter */}
       {/* Search */}
       {/* Cards */}
-      <Row gutter={[16,16]}>
-          {/* gutter - 여백 */} 
-          {renderCards}
+      <Row gutter={[16, 16]}>
+        {/* gutter - 여백 */}
+        {renderCards}
       </Row>
       <div style={{ justifyContent: "center" }}>
         <button>더보기</button>
