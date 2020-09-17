@@ -37,16 +37,16 @@ router.post('/', (req,res) => {
     })
   })
 
-
   router.post('/products', (req,res) => {
-    //product collection에서 들어 있는 모든 상품 가져오기
+    //product에 들어 있는 모든 상품 정보를 가져온다.
     Product.find()
-    .populate("writer")
+    .populate("write")
     .exec((err, productInfo) =>{
       if(err) return res.status(400).json({success: false, err})
-      return res.status(200).json({success: true, productInfo})
+      return res.status(200).json({success :true, productInfo})
     })
   })
+
 
 
 
