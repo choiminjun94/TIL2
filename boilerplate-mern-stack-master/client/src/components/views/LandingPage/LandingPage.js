@@ -1,49 +1,54 @@
 import React, { useEffect, useState } from "react";
+import { FaCode } from "react-icons/fa";
 import axios from "axios";
-import { Icon, Col, Row, Card } from "antd";
+import { Icon, Col, Card, Row, Carousel } from "antd";
 import Meta from "antd/lib/card/Meta";
-
+import ImageSlider from "../../utils/ImageSlider"
 function LandingPage() {
-  // 등록 상품 가져오기
   const [Products, setProducts] = useState([]);
+
   useEffect(() => {
+    //body
     axios.post("/api/product/products").then((response) => {
       if (response.data.success) {
         console.log(response.data);
         setProducts(response.data.productInfo);
       } else {
-        alert("상품 가져오기 실패");
+        alert("상품 가져오는데 실패");
       }
     });
   }, []);
 
-  const renerCards = Products.map((product, index) => {
-    //product의 정보 확인
+  const renderCards = Products.map((product, index) => {
     console.log("product", product);
-    return  <Col lg={6} md={8} xs={24} key={index}>
+
+    return (
+      <Col lg={6} md={8} xs={25} key={index}>
         <Card
-          cover={<img style={{width:'100%', maxHeight: '150px'}} src={`http://localhost:5000/${product.images[0]}`} />}
+          cover={<ImageSlider images={product.images}/>}
         >
           <Meta title={product.title} description={`$${product.price}`} />
         </Card>
       </Col>
+    );
   });
+
   return (
     <div style={{ width: "75%", margin: "3rem auto" }}>
       <div style={{ textAlign: "center" }}>
         <h2>
-          Let Shopping_mall_making
+          let travel anywhere
           <Icon type="rocket" />
         </h2>
       </div>
-      {/* Filer */}
-
-      {/* Saerch */}
-
+      {/* Filter */}
+      {/* Search */}
       {/* Cards */}
-      <Row gutter={[16, 16]}>{renerCards}</Row>
-
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      <Row gutter={[16, 16]}>
+        {/* gutter - 여백 */}
+        {renderCards}
+      </Row>
+      <div style={{ justifyContent: "center" }}>
         <button>더보기</button>
       </div>
     </div>
